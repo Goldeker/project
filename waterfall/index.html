@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>waterfall</title>
+	<style>
+		* {
+			margin: 0;
+			padding: 0;
+			font-family:helvetica neue,arial,hiragino sans gb,stheiti,wenquanyi micro hei,\5FAE\8F6F\96C5\9ED1,\5B8B\4F53,sans-serif;
+		}
+		body,html{
+			width: 100%;
+			height: 100%;
+		}
+		#waterfall_box {
+			position: relative;
+			border: 1px solid blue;
+			width: 100%;
+			margin: 0 auto;
+		}
+		.waterfall_item {
+			width: 200px;
+			font-size: 12px;
+			position: absolute;
+			color: #333333;
+			box-shadow: 2px 2px 2px #eee;
+			transition:0.7s;
+			padding: 15px 10px;
+		}
+		.waterfall_item img {
+			width: 100%;
+		}
+	</style>
+</head>
+
+<body>
+	<div id="waterfall_box">
+		<div class="waterfall_item">
+			<img src="./images/img5.jpg">
+			<div >豫章故郡，洪都新府。星分翼轸，地接衡庐。襟三江而带五湖，控蛮荆而引瓯越。</div>
+		</div>
+
+		<div class="waterfall_item">
+			<img src="./images/img15.jpg">
+			<div >豫章故郡，洪都新府。星分翼轸，地接衡庐。襟三江而带五湖，控蛮荆而引瓯越。</div>
+		</div>
+		<div class="waterfall_item">
+			<img src="./images/img5.jpg">
+			<div >豫章故郡，洪都新府。星分翼轸，地接衡庐。襟三江而带五湖，控蛮荆而引瓯越。</div>
+		</div>
+	
+		<div class="waterfall_item">
+			<img src="./images/img20.jpg">
+			<div >豫章故郡，洪都新府。星分翼轸，地接衡庐。襟三江而带五湖，控蛮荆而引瓯越。</div>
+		</div>
+		<div class="waterfall_item">
+			<img src="./images/timg.jpg">
+			<div >豫章故郡，洪都新府。星分翼轸，地接衡庐。襟三江而带五湖，控蛮荆而引瓯越。</div>
+		</div>
+		<div class="waterfall_item">
+			<img src="./images/img24.jpg">
+			<div >豫章故郡，洪都新府。星分翼轸，地接衡庐。襟三江而带五湖，控蛮荆而引瓯越。</div>
+		</div>
+		<div class="waterfall_item">
+			<img src="./images/timg.jpg">
+			<div >豫章故郡，洪都新府。星分翼轸，地接衡庐。襟三江而带五湖，控蛮荆而引瓯越。</div>
+		</div>
+		<div class="waterfall_item">
+			<img src="./images/timg.jpg">
+			<div >豫章故郡，洪都新府。星分翼轸，地接衡庐。襟三江而带五湖，控蛮荆而引瓯越。</div>
+		</div>
+	<div class="waterfall_item">
+			<img src="./images/timg.jpg">
+			<div >豫章故郡，洪都新府。星分翼轸，地接衡庐。襟三江而带五湖，控蛮荆而引瓯越。</div>
+		</div>
+	</div>
+</body>
+</html>
+<script type="text/javascript">
+	window.onload = function(){
+
+		function waterfall(){
+			var waterfall_box = document.getElementById('waterfall_box')
+			var waterfall_item = waterfall_box.children
+			var leftGap = 10
+			var bottomGap = 10
+			var itemArr = []
+			var boxWidth = waterfall_box.offsetWidth
+			var itemWidth = waterfall_item[0].clientWidth + leftGap
+			var columns = parseInt(boxWidth / (itemWidth + leftGap))
+
+			for(var i = 0;i<waterfall_item.length;i++) {
+
+				if(i < columns) {
+					waterfall_item[i].style.top = 0
+					waterfall_item[i].style.left =  i * itemWidth + 'px'
+					itemArr.push(waterfall_item[i].offsetHeight)
+				}else {
+					var minHeight = Math.min.apply(null,itemArr)
+					var minIndex = itemArr.indexOf(minHeight)
+					waterfall_item[i].style.top = (minHeight+bottomGap) + 'px'
+					waterfall_item[i].style.left = waterfall_item[minIndex].offsetLeft + 'px'
+					itemArr[minIndex] = itemArr[minIndex] + waterfall_item[i].offsetHeight + bottomGap
+				}
+			}
+			waterfall_box.style.height = Math.max.apply(null,itemArr) + 'px'
+			console.log(itemArr)
+		}
+		waterfall()
+		window.onresize = function() {
+        	waterfall()
+   		}
+
+	}
+
+</script>

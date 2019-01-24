@@ -1,5 +1,0 @@
-function animal {}
-
-ghj
-
-echo ""
